@@ -2,9 +2,6 @@ package com.tubmc.gamerules;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.tubmc.commons.identifiers.Identifier;
-import com.tubmc.commons.identifiers.Namespace;
-
 /**
  *    Copyright 2024 TubMC.com
  *
@@ -38,23 +35,4 @@ public final class Entrypoint extends JavaPlugin {
 			new SpigotGameruleImplementation();
 		}
 	}
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void onEnable() {
-		Gamerule.create(Identifier.of("test:int"), AbstractGameruleType.INTEGER_TYPE);
-		Gamerule.create(Identifier.of("test:float"), AbstractGameruleType.FLOAT_TYPE);
-		Gamerule.create(Identifier.of("test:boolean"), AbstractGameruleType.BOOLEAN_TYPE);
-		Gamerule.create(Identifier.of("test:string"), AbstractGameruleType.STRING_TYPE);
-		Gamerule.create(Identifier.of("test:material"), AbstractGameruleType.MATERIAL_TYPE);
-		Gamerule.create(Identifier.of("test:enum"), AbstractGameruleType.createEnumType(new Namespace("test"), Testing.class));
-	}
-	
-	public enum Testing {
-		A,
-		B,
-		C;
-	}
-	
 }
