@@ -54,7 +54,9 @@ final class SpigotGameruleCommand {
 							Gamerule.getTypeOfGamerule(identifier).getSpigotCommandAPIArgument()
 						)
 						.executes((info) -> {
-							AbstractImplementation.IMPLEMENTATION.setValueFor(identifier, info.args().getRaw("value"));
+							if (!AbstractImplementation.IMPLEMENTATION.setValueFor(identifier, info.args().getRaw("value"))) {
+								throw new IllegalArgumentException("Failed to apply invalid argument!");
+							}
 							info.sender().spigot().sendMessage(new TranslatableComponent("commands.gamerule.set", gameruleName, AbstractImplementation.IMPLEMENTATION.getValueFor(identifier)));
 						})
 			);
