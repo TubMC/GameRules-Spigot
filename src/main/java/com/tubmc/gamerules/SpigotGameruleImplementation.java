@@ -168,15 +168,19 @@ final class SpigotGameruleImplementation extends AbstractImplementation {
 				return false;
 			}
 		}
+		if (newValue == null) return false;
 		final List<World> worlds = Bukkit.getWorlds();
 		if (worlds.size() == 0) return false;
-		final World world = worlds.get(0);
 		for (GameRule<?> vanillaGameRule : GameRule.values()) {
 			if (!vanillaGameRule.getName().toLowerCase().equals(identifier.path().asString())) continue;
 			if (vanillaGameRule.getType() == Boolean.class) {
-				world.setGameRule((GameRule<Boolean>)vanillaGameRule, AbstractGameruleType.BOOLEAN_TYPE.fromString(newValue));
+				worlds.forEach(w -> {
+					w.setGameRule((GameRule<Boolean>)vanillaGameRule, Boolean.parseBoolean(newValue));
+				});
 			} else {
-				world.setGameRule((GameRule<Integer>)vanillaGameRule, AbstractGameruleType.INTEGER_TYPE.fromString(newValue));
+				worlds.forEach(w -> {
+					w.setGameRule((GameRule<Integer>)vanillaGameRule, AbstractGameruleType.INTEGER_TYPE.fromString(newValue));
+				});
 			}
 			return true;
 		}
