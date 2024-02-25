@@ -147,7 +147,7 @@ final class SpigotGameruleImplementation extends AbstractImplementation {
 		final World world = worlds.get(0);
 		for (GameRule<?> vanillaGameRule : GameRule.values()) {
 			if (!vanillaGameRule.getName().toLowerCase().equals(identifier.path().asString())) continue;
-			return world.getGameRuleDefault(vanillaGameRule).toString();
+			return world.getGameRuleValue(vanillaGameRule).toString();
 		}
 		return null;
 	}
